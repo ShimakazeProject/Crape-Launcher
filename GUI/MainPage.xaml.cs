@@ -23,9 +23,9 @@ namespace CLauncher.GUI
         public MainPage()
         {
             InitializeComponent();
-            btnMission.Content = Config.Strings.Mission;
-            btnSetting.Content = Config.Strings.Settings;
-            btnExit.Content = Config.Strings.Exit;
+            btnMission.Content = Configs.Strings.Mission;
+            btnSetting.Content = Configs.Strings.Settings;
+            btnExit.Content = Configs.Strings.Exit;
         }
 
         private void Battle_Click(object sender, RoutedEventArgs e)

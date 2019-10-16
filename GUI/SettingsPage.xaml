@@ -262,30 +262,30 @@
     </Page.Resources>
     <WrapPanel>
         <!--显示设置-->
-        <GroupBox Name="gbVideoSet" Header="{x:Static props:Resources.VideoSettings}">
+        <GroupBox Name="gbVideoSet" Header="!VideoSettings}">
             <Grid>
-                <TextBlock x:Name="tbScreen" Margin="15,10,240,0" Text="{x:Static props:Resources.Screen}"/>
+                <TextBlock x:Name="tbScreen" Margin="15,10,240,0" Text="!Screen}"/>
                 <ComboBox x:Name="ScreenSet" Margin="105,10,0,0"
                           Height="16" Width="128" 
                           SelectionChanged="ScreenSet_SelectionChanged"
                           IsTextSearchEnabled="False"
                           IsEditable="True"/>
-                <CheckBox Checked="WindowSet" Content="{x:Static props:Resources.IsWindow}"
+                <CheckBox Checked="WindowSet" Content="!IsWindow}"
                           Unchecked="WindowSet"
                           x:Name="cbWindow"
                           Margin="13,31,0,0"/>
-                <CheckBox x:Name="cbNoFrame" Content="{x:Static props:Resources.NoFrame}"
+                <CheckBox x:Name="cbNoFrame" Content="!NoFrame}"
                           Unchecked="NoWindowFrameSet"
                           Checked="NoWindowFrameSet"
                           IsEnabled="False" Margin="115,31,0,0"/>
-                <CheckBox x:Name="cbGraphicsAPI" Content="{x:Static props:Resources.UseGraphicsAPI}"
+                <CheckBox x:Name="cbGraphicsAPI" Content="!UseGraphicsAPI}"
                           Unchecked="DDrawSet"
                           Checked="DDrawSet"
                           Margin="13,51,0,0"/>
             </Grid>
         </GroupBox>
         <!--声音设置-->
-        <GroupBox x:Name="gbAudioSet" Header="{x:Static props:Resources.AudioSettings}">
+        <GroupBox x:Name="gbAudioSet" Header="!AudioSettings}">
             <Grid >
                 <Slider x:Name="BGM"
                         Height="16"
@@ -303,9 +303,9 @@
                         Width="200"
                         Maximum="1"
                         ValueChanged="ValueChanged" Margin="107,53,33,2"/>
-                <TextBlock x:Name="tbBGM" Margin="0,10,238,0" Text="{x:Static props:Resources.BGM}"/>
-                <TextBlock x:Name="tbVOX" Margin="0,31,239,0" Text="{x:Static props:Resources.VOX}"/>
-                <TextBlock x:Name="tbSEM" Margin="0,52,240,0" Text="{x:Static props:Resources.SEM}"/>
+                <TextBlock x:Name="tbBGM" Margin="0,10,238,0" Text="!BGM}"/>
+                <TextBlock x:Name="tbVOX" Margin="0,31,239,0" Text="!VOX}"/>
+                <TextBlock x:Name="tbSEM" Margin="0,52,240,0" Text="!SEM}"/>
             </Grid>
         </GroupBox>
     </WrapPanel>

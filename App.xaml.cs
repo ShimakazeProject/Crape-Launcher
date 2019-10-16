@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 
-using Str = CLauncher.Config.Strings;
+using Str = CLauncher.Configs.Strings;
 using Clr = CLauncher.Config.Colors;
 
 using Global = CLauncher.Config.Conf;

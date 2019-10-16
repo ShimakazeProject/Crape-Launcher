@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Strings = CLauncher.Config.Strings;
+using Strings = CLauncher.Configs.Strings;
 using Global = CLauncher.Config.Conf;
 using System.IO;
 using System.Json;

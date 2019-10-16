@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Str = CLauncher.Config.Strings;
+using Str = CLauncher.Configs.Strings;
 using Clr = CLauncher.Config.Colors;
 
 using Global = CLauncher.Config.Conf;
