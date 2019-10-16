@@ -1,0 +1,36 @@
+﻿<Page x:Class="CLauncher.GUI.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:props="clr-namespace:CLauncher.Properties"
+      xmlns:local="clr-namespace:CLauncher.GUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="340"
+      Title="MainPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*" MaxWidth="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="leftGrid"/>
+        <StackPanel Grid.Column="1">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </StackPanel.Resources>
+            <Image Margin="5,10,5,0" Source="/CLauncher;component/TempResource/48564472_p0.jpg" />
+            <Button x:Name="btnMission" Content="!Launcher!" Margin="5,10,5,0" Click="Battle_Click"/>
+            <!--<Button Content="{x:Static props:Resources.BtnSkirmish}" Margin="5,10,5,0"/>
+            <Button Content="{x:Static props:Resources.BtnBattleOnLine}" Margin="5,10,5,0"/>
+            <Button Content="{x:Static props:Resources.BtnBattleInLan}" Margin="5,10,5,0"/>-->
+            <Button x:Name="btnSetting" Content="!Settings!" Margin="5,10,5,0" Click="Settings_Click"/>
+            <!--<Button Content="{x:Static props:Resources.BtnModTools}" Margin="5,10,5,0"/>-->
+
+            <Button x:Name="btnExit" Content="!Exit!" Margin="5,10,5,0" Click="Exit_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
