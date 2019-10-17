@@ -282,6 +282,10 @@
                           Unchecked="DDrawSet"
                           Checked="DDrawSet"
                           Margin="13,51,0,0"/>
+                <TextBlock x:Name="tbUseDDraw" Margin="20,71,0,0" HorizontalAlignment="Left" Text="!UseAPI!"/>
+                <ComboBox x:Name="cbxGraphics" Margin="120,71,40,10" HorizontalAlignment="Stretch" Text="{Binding RendererJson}"
+                          DisplayMemberPath="Name" IsReadOnly="True" SelectionChanged="cbxGraphics_SelectionChanged"/>
+
             </Grid>
         </GroupBox>
         <!--声音设置-->

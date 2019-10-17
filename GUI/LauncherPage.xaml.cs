@@ -143,8 +143,11 @@ namespace CLauncher.GUI
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Resource\Missions.json"))
                 return false;
-            JsonArray missions = (JsonArray)JsonValue.Parse(File.ReadAllText(@"Resource\Missions.json"));
-            List<JsonValue> missionList = missions.ToList();
+            JsonObject missionJson = (JsonObject)JsonValue.Parse(File.ReadAllText(@"Resource\Missions.json"));
+            JsonValue tmp;
+            missionJson.TryGetValue("missions", out tmp);
+            JsonArray missions = (JsonArray)tmp;
+            List <JsonValue> missionList = missions.ToList();
             foreach (JsonObject mission in missionList)
             {
                 if (mission.JsonType != JsonType.Object) throw new FormatException();
