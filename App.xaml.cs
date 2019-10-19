@@ -16,6 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Json;
 
+using CLauncher.Configs;
+using Win = CLauncher.Configs.UI.Win;
+using System.Windows.Controls;
+
 namespace CLauncher
 {
     /// <summary>
@@ -23,38 +27,88 @@ namespace CLauncher
     /// </summary>
     public partial class App : Application
     {
+        public static Frame GetFrame(Page page)
+        {
+            Frame pageFrame = null;
+            DependencyObject currParent = VisualTreeHelper.GetParent(page);
+            while (currParent != null && pageFrame == null)
+            {
+                pageFrame = currParent as Frame;
+                currParent = VisualTreeHelper.GetParent(currParent);
+            }
+            return pageFrame;
+        }
+
         public static JsonValue GetJsonValue(JsonObject json,string key)
         {
             JsonValue jvStr;
             json.TryGetValue(key, out jvStr);
             return jvStr;
         }
+
+        public static JsonValue LoadJsonFromFile(string path)
+        {
+            FileStream fs = new FileStream(path, FileMode.Open);
+            StreamReader sr = new StreamReader(fs);
+            string json = "";
+            while (!sr.EndOfStream)
+            {
+                string str = sr.ReadLine().Split(new string[] { "//" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                if (str != null) json += str;
+            }
+            return JsonValue.Parse(json);
+        }
+
+        public static Brush String2Brush(string color)
+        {
+            System.Drawing.Color clr = System.Drawing.ColorTranslator.FromHtml(color);
+            return new SolidColorBrush(Color.FromArgb(clr.A, clr.R, clr.G, clr.B));
+        }
         public App()
         {
             #region 字符串初始化
-            JsonObject json = (JsonObject)JsonValue.Parse(File.ReadAllText(@"Resource\Strings.json"));
-            Str.Title = GetJsonValue(json, "Title");
-            Str.Launch = GetJsonValue(json, "Launch");
-            Str.Settings = GetJsonValue(json, "Settings");
-            Str.About = GetJsonValue(json, "About");
-            Str.Exit = GetJsonValue(json, "Exit");
-            Str.Mission = GetJsonValue(json, "Mission");
-            Str.Summary = GetJsonValue(json, "Summary");
-            Str.Easy = GetJsonValue(json, "Easy");
-            Str.Normal = GetJsonValue(json, "Normal");
-            Str.Hard = GetJsonValue(json, "Hard");
-            Str.Run = GetJsonValue(json, "Run");
-            Str.VideoSettings = GetJsonValue(json, "VideoSettings");
-            Str.Screen = GetJsonValue(json, "Screen");
-            Str.IsWindow = GetJsonValue(json, "IsWindow");
-            Str.NoFrame = GetJsonValue(json, "NoFrame");
-            Str.UseGraphicsAPI = GetJsonValue(json, "UseGraphicsAPI");
-            Str.GraphicsAPI = GetJsonValue(json, "GraphicsAPI");
-            Str.AudioSettings = GetJsonValue(json, "AudioSettings");
-            Str.BGM = GetJsonValue(json, "BGM");
-            Str.VOX = GetJsonValue(json, "VOX");
-            Str.SEM = GetJsonValue(json, "SEM");
+            {
+                JsonObject strjson = (JsonObject)LoadJsonFromFile(@"Resource\Strings.json");
+                Str.Title = GetJsonValue(strjson, "Title");
+                Str.Launch = GetJsonValue(strjson, "Launch");
+                Str.Settings = GetJsonValue(strjson, "Settings");
+                Str.About = GetJsonValue(strjson, "About");
+                Str.Exit = GetJsonValue(strjson, "Exit");
+                Str.Mission = GetJsonValue(strjson, "Mission");
+                Str.Summary = GetJsonValue(strjson, "Summary");
+                Str.Easy = GetJsonValue(strjson, "Easy");
+                Str.Normal = GetJsonValue(strjson, "Normal");
+                Str.Hard = GetJsonValue(strjson, "Hard");
+                Str.Run = GetJsonValue(strjson, "Run");
+                Str.VideoSettings = GetJsonValue(strjson, "VideoSettings");
+                Str.Screen = GetJsonValue(strjson, "Screen");
+                Str.IsWindow = GetJsonValue(strjson, "IsWindow");
+                Str.NoFrame = GetJsonValue(strjson, "NoFrame");
+                Str.UseGraphicsAPI = GetJsonValue(strjson, "UseGraphicsAPI");
+                Str.GraphicsAPI = GetJsonValue(strjson, "GraphicsAPI");
+                Str.AudioSettings = GetJsonValue(strjson, "AudioSettings");
+                Str.BGM = GetJsonValue(strjson, "BGM");
+                Str.VOX = GetJsonValue(strjson, "VOX");
+                Str.SEM = GetJsonValue(strjson, "SEM");
+            }
             #endregion
+            #region UI设置初始化
+            JsonObject json = (JsonObject)LoadJsonFromFile(@"Resource\LauncherConfigs.json");
+            {
+                JsonObject set = (JsonObject)GetJsonValue(json, "Settings");
+                {
+                    Settings.IniFileName = GetJsonValue(set, "ra2md.ini");
+                    set = (JsonObject)GetJsonValue(set, "Resource");
+                    Settings.Resource.Images = GetJsonValue(set, "Images") + "\\";
+                    Settings.Resource.Renderers = GetJsonValue(set, "Renderers") + "\\";
+                    Settings.Resource.Configs = GetJsonValue(set, "Configs") + "\\";
+                }
+                //JsonObject ui = (JsonObject)GetJsonValue(json, "UI");
+                
+            }
+            #endregion
+
+
 
             #region RA2CA.INI Reader
             {

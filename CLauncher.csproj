@@ -79,12 +79,14 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Configs\Settings.cs" />
     <Compile Include="Configs\Strings.cs" />
+    <Compile Include="Configs\UI\Win.cs" />
     <Compile Include="GUI\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="GUI\FrameWindow.xaml.cs">
+      <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -92,6 +94,7 @@
     <Compile Include="GUI\LauncherPage.xaml.cs">
       <DependentUpon>LauncherPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Tools.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="UC2.xaml.cs">
@@ -107,7 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\MainWindow.xaml">
+    <Page Include="GUI\FrameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

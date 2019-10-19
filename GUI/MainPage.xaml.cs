@@ -30,17 +30,17 @@ namespace CLauncher.GUI
 
         private void Battle_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)GetUIParentCore()).Content = new LauncherPage();
+            App.GetFrame(this).Content = new LauncherPage();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)GetUIParentCore()).Close();
+            ((Window)((Border)((Grid)App.GetFrame(this).Parent).Parent).Parent).Close();
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)GetUIParentCore()).Content = new SettingsPage();
+            App.GetFrame(this).Content = new SettingsPage();
         }
     }
 }
