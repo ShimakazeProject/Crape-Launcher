@@ -34,7 +34,7 @@
                     </DockPanel>
                 </DockPanel>
             </Grid>
-            <Frame x:Name="_frame" Grid.Row="1" NavigationUIVisibility="Hidden" DataContextChanged="_frame_DataContextChanged"/>
+            <Frame x:Name="_frame" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="_frame_ContentRendered"/>
         </Grid>
     </Border>
 </Window>

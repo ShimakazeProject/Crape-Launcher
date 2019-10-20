@@ -10,8 +10,8 @@
       Title="MainPage">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="2*" MaxWidth="300"/>
+            <ColumnDefinition x:Name="_left" Width="3*"/>
+            <ColumnDefinition x:Name="_right" Width="2*" MaxWidth="300"/>
         </Grid.ColumnDefinitions>
         <Grid Name="leftGrid"/>
         <StackPanel Grid.Column="1">

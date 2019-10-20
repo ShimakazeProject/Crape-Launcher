@@ -69,11 +69,7 @@ namespace CLauncher
             #region 字符串初始化
             {
                 JsonObject strjson = (JsonObject)LoadJsonFromFile(@"Resource\Strings.json");
-                Str.Title = GetJsonValue(strjson, "Title");
-                Str.Launch = GetJsonValue(strjson, "Launch");
-                Str.Settings = GetJsonValue(strjson, "Settings");
                 Str.About = GetJsonValue(strjson, "About");
-                Str.Exit = GetJsonValue(strjson, "Exit");
                 Str.Mission = GetJsonValue(strjson, "Mission");
                 Str.Summary = GetJsonValue(strjson, "Summary");
                 Str.Easy = GetJsonValue(strjson, "Easy");

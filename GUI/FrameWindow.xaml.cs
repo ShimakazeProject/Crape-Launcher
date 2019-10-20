@@ -116,27 +116,34 @@ namespace CLauncher.GUI
         private void _back_Click(object sender, RoutedEventArgs e)
         {
             GoBack();
-            if (_frame.CanGoBack) _back.IsEnabled = true;
-            else _back.IsEnabled = false;
+            Ifback();
         }
         private void _forward_Click(object sender, RoutedEventArgs e)
         {
             GoForward();
-            if (_frame.CanGoForward) _forward.IsEnabled = true;
-            else _forward.IsEnabled = false;
+            Ifforward();
         }
         private void _title_MouseDown(object sender, MouseButtonEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         private void _title_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed) DragMove();
         }
-        private void _frame_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        public void GoBack() => _frame.GoBack();
+        public void GoForward() => _frame.GoForward();
+        private void Ifback()
         {
             if (_frame.CanGoBack) _back.IsEnabled = true;
             else _back.IsEnabled = false;
         }
-        public void GoBack() => _frame.GoBack();
-        public void GoForward() => _frame.GoForward();
-
+        private void Ifforward()
+        {
+            if (_frame.CanGoForward) _forward.IsEnabled = true;
+            else _forward.IsEnabled = false;
+        }
+        private void _frame_ContentRendered(object sender, EventArgs e)
+        {
+            Ifback();
+            Ifforward();
+        }
     }
 }
