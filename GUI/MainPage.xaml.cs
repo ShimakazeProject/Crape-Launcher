@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLauncher.Configs;
+using System;
 using System.Collections.Generic;
 using System.Json;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace CLauncher.GUI
         }
         private void init()
         {
-            JsonObject json = (JsonObject)App.LoadJsonFromFile("Resource\\MainPageConfig.json");
+            JsonObject json = (JsonObject)App.LoadJsonFromFile(Settings.MainPageConf);
             {
                 JsonObject js =(JsonObject)App.GetJsonValue(json, "Right");
                 _right.Width = new GridLength(App.GetJsonValue(js, "Width"), GridUnitType.Star);

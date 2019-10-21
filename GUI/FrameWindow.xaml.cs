@@ -40,7 +40,7 @@ namespace CLauncher.GUI
         }
         private void init()
         {
-            JsonObject json = (JsonObject)App.LoadJsonFromFile("Resource\\FrameWindowConfig.json");
+            JsonObject json = (JsonObject)App.LoadJsonFromFile(Settings.FrameWindowConf);
             Title = App.GetJsonValue(json, "Title");
             Foreground = App.String2Brush(App.GetJsonValue(json, "Foreground"));
             Background = App.String2Brush(App.GetJsonValue(json, "Background"));

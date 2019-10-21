@@ -9,6 +9,9 @@ namespace CLauncher.Configs
     public static class Settings
     {
         public static string IniFileName { get; set; }
+        public static string FrameWindowConf { get; set; }
+        public static string MainPageConf { get; set; }
+        public static string MissionPageConf { get; set; }
         public static class Resource
         {
             public static string Images { get; set; }

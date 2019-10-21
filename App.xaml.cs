@@ -99,8 +99,11 @@ namespace CLauncher
                     Settings.Resource.Renderers = GetJsonValue(set, "Renderers") + "\\";
                     Settings.Resource.Configs = GetJsonValue(set, "Configs") + "\\";
                 }
-                //JsonObject ui = (JsonObject)GetJsonValue(json, "UI");
-                
+                JsonObject ui = (JsonObject)GetJsonValue(json, "UI");
+                Settings.FrameWindowConf = Settings.Resource.Configs + GetJsonValue(ui, "FrameWindowConfigsJson");
+                Settings.MainPageConf = Settings.Resource.Configs + GetJsonValue(ui, "MainPageConfigsJson");
+
+
             }
             #endregion
 

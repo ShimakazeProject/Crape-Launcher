@@ -53,11 +53,6 @@ namespace CLauncher
                 RA2CA.IniWriteValue("Video", "ScreenHeight", Height.ToString());
 
             }
-
-            public static string FormatStr(string str)
-            {
-                return str.Replace(@"\n", "\r\n").Replace(@"\t", "\t");
-            }
             static Conf()
             {
                 Missions = new List<MissionList>();
