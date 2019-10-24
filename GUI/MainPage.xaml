@@ -23,6 +23,7 @@
             </StackPanel.Resources>
             <Image Margin="5,10,5,0" Source="/CLauncher;component/TempResource/48564472_p0.jpg" />
             <Button x:Name="btnMission" Content="!Launcher!" Margin="5,10,5,0" Click="Battle_Click"/>
+            <Button x:Name="btnLoader" Content="!Loader!" Margin="5,10,5,0" Click="Loader_Click"/>
             <!--<Button Content="{x:Static props:Resources.BtnSkirmish}" Margin="5,10,5,0"/>
             <Button Content="{x:Static props:Resources.BtnBattleOnLine}" Margin="5,10,5,0"/>
             <Button Content="{x:Static props:Resources.BtnBattleInLan}" Margin="5,10,5,0"/>-->

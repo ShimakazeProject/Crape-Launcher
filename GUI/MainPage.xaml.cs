@@ -97,5 +97,10 @@ namespace CLauncher.GUI
         {
             App.GetFrame(this).Content = new SettingsPage();
         }
+
+        private void Loader_Click(object sender, RoutedEventArgs e)
+        {
+            App.GetFrame(this).Content = new SavedLoaderPage();
+        }
     }
 }
