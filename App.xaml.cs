@@ -19,6 +19,7 @@ using System.Json;
 using CLauncher.Configs;
 using Win = CLauncher.Configs.UI.Win;
 using System.Windows.Controls;
+using CLauncher.LogMgr;
 
 namespace CLauncher
 {
@@ -107,7 +108,7 @@ namespace CLauncher
             }
             #endregion
 
-
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
 
             #region RA2CA.INI Reader
             {
@@ -162,6 +163,13 @@ namespace CLauncher
                 fs.Dispose();
             }
             #endregion
+        }
+
+        private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            Logger logger = new Logger();
+            logger.Writer(LogGrade.fatal, e.Exception);
+            throw new NotImplementedException();
         }
     }
 }

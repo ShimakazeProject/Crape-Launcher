@@ -452,10 +452,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="载入存档" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <DataGrid x:Name="_list" Grid.Row="1">
+        <DataGrid x:Name="_list" Grid.Row="1" MouseDoubleClick="_list_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="存档名" />
-                <DataGridTextColumn Header="存档标题"/>
+                <DataGridTextColumn Header="存档标题" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="存档时间" Binding="{Binding Date}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

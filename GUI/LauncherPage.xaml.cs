@@ -17,6 +17,7 @@ using Strings = CLauncher.Configs.Strings;
 using Global = CLauncher.Config.Conf;
 using System.IO;
 using System.Json;
+using CLauncher.LogMgr;
 
 namespace CLauncher.GUI
 {
@@ -161,6 +162,10 @@ namespace CLauncher.GUI
             Global.IniW();
             if (true)// Program.Program.MD5()
             {
+                if (dgMissionList.SelectedItem==null)
+                {
+                    return;
+                }
                 FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "spawn.ini");
                 file.Delete();
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "spawn.ini", spawnIni.ToString());
