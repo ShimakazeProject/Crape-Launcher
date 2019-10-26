@@ -82,6 +82,9 @@
     <Compile Include="Configs\Settings.cs" />
     <Compile Include="Configs\Strings.cs" />
     <Compile Include="Configs\UI\Win.cs" />
+    <Compile Include="GUI\PlayerComboBox.xaml.cs">
+      <DependentUpon>PlayerComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\SavedLoaderPage.xaml.cs">
       <DependentUpon>SavedLoaderPage.xaml</DependentUpon>
     </Compile>
@@ -94,19 +97,21 @@
     <Compile Include="GUI\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\LauncherPage.xaml.cs">
-      <DependentUpon>LauncherPage.xaml</DependentUpon>
+    <Compile Include="GUI\MissionPage.xaml.cs">
+      <DependentUpon>MissionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\SkirmishPage.xaml.cs">
+      <DependentUpon>SkirmishPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Tools.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="NewIdea\Syringe.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="UC2.xaml.cs">
-      <DependentUpon>UC2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UC3.xaml.cs">
-      <DependentUpon>UC3.xaml</DependentUpon>
-    </Compile>
+    <Page Include="GUI\PlayerComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\SavedLoaderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\LauncherPage.xaml">
+    <Page Include="GUI\MissionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +137,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Config.cs" />
+    <Page Include="GUI\SkirmishPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RoutDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,14 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

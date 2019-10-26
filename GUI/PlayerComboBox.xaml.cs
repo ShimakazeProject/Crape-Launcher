@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CLauncher
+namespace CLauncher.GUI
 {
     /// <summary>
-    /// UC3.xaml 的交互逻辑
+    /// PlayerComboBox.xaml 的交互逻辑
     /// </summary>
-    public partial class UC3 : UserControl
+    public partial class PlayerComboBox : UserControl
     {
-        public UC3()
+        public PlayerComboBox()
         {
             InitializeComponent();
         }

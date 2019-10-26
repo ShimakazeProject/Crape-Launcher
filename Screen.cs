@@ -52,6 +52,9 @@ namespace CLauncher
         [DllImport("user32.dll", CharSet = CharSet.Auto)] static extern int ChangeDisplaySettings([In] ref DEVMODE lpDevMode, int dwFlags);
         [DllImport("user32.dll", CharSet = CharSet.Auto)] static extern bool EnumDisplaySettings(string lpszDeviceName, Int32 iModeNum, ref DEVMODE lpDevMode);
         #endregion
+        /// <summary>
+        /// 修改色深
+        /// </summary>
         public static void ChangeRes()
         {
             DEVMODE DevM = new DEVMODE
@@ -74,6 +77,9 @@ namespace CLauncher
             }//*/
             //long result = ChangeDisplaySettings(ref DevM, 0);
         }
+        /// <summary>
+        /// 还原修改
+        /// </summary>
         public static void DisChangeRes()
         {
             DEVMODE DevM = new DEVMODE

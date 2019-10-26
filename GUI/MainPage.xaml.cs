@@ -85,7 +85,7 @@ namespace CLauncher.GUI
         }
         private void Battle_Click(object sender, RoutedEventArgs e)
         {
-            App.GetFrame(this).Content = new LauncherPage();
+            App.GetFrame(this).Content = new MissionPage();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

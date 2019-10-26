@@ -59,10 +59,10 @@ namespace CLauncher.GUI
                     _list.Items.Add(new SavedInfomation(file));
                 }
             }
-            catch (DirectoryNotFoundException e)
+            catch (DirectoryNotFoundException)
             {
                 Logger logger = new Logger();
-                logger.Writer(LogGrade.error, "未发现可用存档", e);
+                logger.Writer(LogGrade.error, "未发现可用存档");
                 _list.Items.Add(new SavedInfomation
                 {
                     Name = "没有发现可用存档",

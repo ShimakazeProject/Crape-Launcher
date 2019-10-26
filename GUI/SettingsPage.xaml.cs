@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Strings = CLauncher.Configs.Strings;
-using Clr = CLauncher.Config.Colors;
 
 using Global = CLauncher.Config.Conf;
 using System.IO;

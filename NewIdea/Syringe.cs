@@ -5,15 +5,220 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLauncher.LogMgr
+namespace CLauncher.NewIdea
 {
+    class Syringe
+    {
+        public int Run(string[] args)
+        {
+            const string VersionString = "Syringe 0.7.2.0 C#";
+
+            Logger logger = new Logger();
+            logger.Writer(LogGrade.info, VersionString);
+            
+                string argStr = "";
+                foreach (var arg in args)
+                    argStr += arg + " ";
+                logger.Writer(LogGrade.info, string.Format("WinMain: arguments = \"{0}\"", argStr));
+            
+            var failure = "Could not load executable.";
+            var exit_code = 774L;
+
+            try
+            {
+                if (!(args.Length>1))
+                {
+                    throw new InvalidArgumentsException();
+                }
+
+                logger.Writer(LogGrade.info, string.Format("WinMan: Trying to load execultable file \"{0}\" ...", args[1]));
+
+                //SyringeDebugger Debugger
+
+                failure = "Could not run executable";
+
+                logger.Writer(LogGrade.info, "WinMain: SyringeDebugger::FindDLLs();");
+                //debugger.finddlls();
+
+                logger.Writer(LogGrade.info, string.Format("WinMain: SyringeDebugger::Run(\"{0}\");", argStr));
+
+                //debugger.Run();
+                logger.Writer(LogGrade.info, "WinMain: SyringeDebugger::Run finished.");
+                logger.Writer(LogGrade.info, "WinMain: Exiting on success.");
+                return 0;
+            }catch(InvalidArgumentsException e)
+            {
+                logger.Writer(LogGrade.fatal, "WinMain: No or invalid command line arguments given, exiting...");
+                new ErrorBox("Syringe cannot be run just like that.\n\nUsage:\n\tSyringe.exe \"<exe name>\" <arguments>");
+                exit_code = 87L;
+            }
+            catch (Exception e)
+            {
+                logger.Writer(LogGrade.fatal, e);
+                new ErrorBox(e, false);
+            }
+            logger.Writer(LogGrade.info, "WinMain: Exiting on failure.");
+            return (int)exit_code;
+
+        }
+    }
+    class SyringeDebugger
+    {
+        static uint MaxNameLength = 0x100u;
+        static byte INIT = 0;
+        static byte INT3 = 0xCC;
+        static byte NOP = 0x90;
+
+        #region Private
+        private string exe;
+        /*
+        private void RetrieveInfo()
+        {
+            Logger logger = new Logger();
+            logger.Writer(LogGrade.info, "SyringeDebugger.RetrieveInfo(): Retrieving info from the executable file...");
+
+            try
+            {
+                PortableExecutable pe = new PortableExecutable(exe);
+
+            }
+            catch (Exception)
+            {
+                logger.Writer(LogGrade.fatal, "SyringeDebugger.RetrieveInfo(): Failed to open the executable!");
+                throw;
+            }
+            //if (!pImGetProcAddress || !pImLoadLibrary)
+            {
+                logger.Writer( LogGrade.error,
+                    "SyringeDebugger.RetrieveInfo(): ERROR: Either a LoadLibraryA or a GetProcAddress import could not be found!");
+
+                //throw_lasterror_or(ERROR_PROC_NOT_FOUND, exe);
+            }
+
+            // read meta information: size and checksum
+            if (ifstream is { exe, ifstream::binary })
+            {
+
+        is.seekg(0, ifstream::end);
+                dwExeSize = static_cast<DWORD>(is.tellg());
+
+        is.seekg(0, ifstream::beg);
+
+                CRC32 crc;
+                char buffer[0x1000];
+                while (auto const read = is.read(buffer, std::size(buffer)).gcount()) {
+                    crc.compute(buffer, read);
+                }
+                dwExeCRC = crc.value();
+            }
+
+            logger.Writer(LogGrade.info, "SyringeDebugger.RetrieveInfo(): Executable information successfully retrieved.");
+            logger.Writer(LogGrade.msg, "exe = %s", exe.c_str());
+            logger.Writer(LogGrade.msg, "pImLoadLibrary = 0x%08X", pImLoadLibrary);
+            logger.Writer(LogGrade.msg, "pImGetProcAddress = 0x%08X", pImGetProcAddress);
+            logger.Writer(LogGrade.msg, "pcEntryPoint = 0x%08X", pcEntryPoint);
+            logger.Writer(LogGrade.msg, "dwExeSize = 0x%08X", dwExeSize);
+            logger.Writer(LogGrade.msg, "dwExeCRC = 0x%08X", dwExeCRC);
+            logger.Writer(LogGrade.msg, "dwTimestamp = 0x%08X", dwTimeStamp);
+
+            logger.Writer(LogGrade.info, "SyringeDebugger.RetrieveInfo(): Opening %s to determine imports.", exe.c_str());
+        }
+        //*/
+        #endregion
+
+        public SyringeDebugger(string filename)
+        {
+            exe = filename;
+            //RetrieveInfo();
+        }
+        public void FindDLLs()
+        {
+            /*
+            std::string_view const fn(file->cFileName);
+            PortableExecutable const DLL{ fn };
+            HookBuffer buffer;
+
+            auto canLoad = false;
+            if (auto const hooks = DLL.FindSection(".syhks00")) {
+                canLoad = ParseHooksSection(DLL, *hooks, buffer);
+            } else
+            {
+                canLoad = ParseInjFileHooks(fn, buffer);
+            }
+
+            if (canLoad)
+            {
+                Log::WriteLine(
+                    __FUNCTION__ ": Recognized DLL: \"%.*s\"", printable(fn));
+
+                if (auto const res = Handshake(
+                     DLL.GetFilename(), static_cast<int>(buffer.count),
+                     buffer.checksum.value()))
+				{
+                    canLoad = *res;
+                } else if (auto const hosts = DLL.FindSection(".syexe00")) {
+                    canLoad = CanHostDLL(DLL, *hosts);
+                }
+            }
+
+            if (canLoad)
+            {
+                for (auto const&it : buffer.hooks) {
+                    auto const eip = it.first;
+                    auto & h = Breakpoints[eip];
+                    h.p_caller_code.clear();
+                    h.original_opcode = 0x00;
+                    h.hooks.insert(
+                        h.hooks.end(), it.second.begin(), it.second.end());
+                }
+            }
+            else if (!buffer.hooks.empty())
+            {
+                Log::WriteLine(
+                    __FUNCTION__ ": DLL load was prevented: \"%.*s\"",
+                    printable(fn));
+            }
+            */
+            DirectoryInfo folder = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            
+                foreach (FileInfo file in folder.GetFiles("*.dll"))
+                {
+                    
+                }
+        }
+    }
+    class PortableExecutable
+    {
+        #region Private
+        private string Filename;
+        //private IMAGE_DOS_HEADER uDOSHeader;
+        //private IMAGE_NT_HEADERS uPEHeader;
+        #endregion
+        public PortableExecutable(string exe)
+        {
+
+        }
+    }
+
+
+    [Serializable]
+    public class InvalidArgumentsException : Exception
+    {
+        public InvalidArgumentsException() { }
+        public InvalidArgumentsException(string message) : base(message) { }
+        public InvalidArgumentsException(string message, Exception inner) : base(message, inner) { }
+        protected InvalidArgumentsException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
+
     /// <summary>
     /// 日志管理类
     /// </summary>
     public class Logger
     {
         private string LogPath { get => Logname + ".log"; }
-        private string Logname= @"Crape_Launcher";
+        private string Logname = @"Syringe";
 
         #region 内部方法
         private void writerHeader(LogGrade grade)

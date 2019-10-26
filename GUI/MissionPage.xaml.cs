@@ -24,7 +24,7 @@ namespace CLauncher.GUI
     /// <summary>
     /// LauncherPage.xaml 的交互逻辑
     /// </summary>
-    public partial class LauncherPage : Page
+    public partial class MissionPage : Page
     {
         private Spawn spawnIni;
         /// <summary>
@@ -50,7 +50,7 @@ namespace CLauncher.GUI
             }
         }
         /// <summary>
-        /// Spawn Ini
+        /// 任务专用 Spawn Ini
         /// </summary>
         class Spawn
         {
@@ -128,7 +128,7 @@ namespace CLauncher.GUI
         /// <summary>
         /// 构造方法
         /// </summary>
-        public LauncherPage()
+        public MissionPage()
         {
             InitializeComponent();
             dgtc1.Header = Strings.Mission;
@@ -138,9 +138,9 @@ namespace CLauncher.GUI
             tbNormal.Text = Strings.Normal;
             tbHard.Text = Strings.Hard;
 
-            if (!Initializing()) throw new Exception("初始化异常");
+            if (!init()) throw new Exception("初始化异常");
         }
-        private bool Initializing()
+        private bool init()
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Resource\Missions.json"))
                 return false;
@@ -156,7 +156,7 @@ namespace CLauncher.GUI
             }
             return true;
         }
-
+        // 运行游戏
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Global.IniW();
@@ -169,54 +169,24 @@ namespace CLauncher.GUI
                 FileInfo file = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "spawn.ini");
                 file.Delete();
                 File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "spawn.ini", spawnIni.ToString());
-                Run();
+                App.RunGame();
             }//*/
         }
-
+        // 难度修改
         private void SEasyHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int Value = (int)sEasyHard.Value;
             Global.Difficult = Value;
             sEasyHard.Value = Value;
         }
-        private void Run()
-        {
-            string gamemd = "syringe.exe \"gamemd.exe\" ";
-            string command = GetCmd();
-            try
-            {
-                if (Global.IsWindow) //设置16色
-                    Screen.ChangeRes();
-
-                System.Diagnostics.Process proc = System.Diagnostics.Process.Start(
-                        AppDomain.CurrentDomain.BaseDirectory + gamemd + command);
-                if (Global.IsWindow)// 还原
-                    Screen.DisChangeRes();//还原色深
-                if (proc != null)
-                {
-
-                }
-            }
-            catch (System.ComponentModel.Win32Exception)
-            {
-                return;
-            }
-        }
-        private string GetCmd()
-        {
-            string ret = "-SPAWN -CD ";
-            if (Global.SpeedCtrl) ret += "-SPEEDCONTROL ";
-            if (Global.UseLog) ret += "-LOG ";
-            return ret;
-        }
-
+        // 选择列表
         private void DgMissionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var ml = (MissionJson)dgMissionList.SelectedItem;
             tbSummarys.Text = ml.Summary;
             spawnIni = new Spawn((JsonObject)ml.Spawn);
         }
-
+        
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (Width>=500)
